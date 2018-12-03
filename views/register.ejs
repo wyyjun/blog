@@ -1,0 +1,86 @@
+<% include header %>
+
+
+<link rel="stylesheet" type="text/css" href="/css/verify.css">
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/verify.js"></script>
+<h2>
+    <%= title%>
+</h2>
+<div class="container">
+
+    <form class="form-signin">
+        <h2 class="form-signin-heading">请注册</h2>
+        <label for="username" class="sr-only">用户名</label>
+        <input type="text" id="username" class="form-control" placeholder="用户名" required autofocus>
+        <label for="password" class="sr-only">密码</label>
+        <input type="password" id="password" class="form-control" placeholder="密码" required>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <div id="mpanel2"></div>
+        <button class="btn btn-lg btn-primary btn-block" type="button" id="btn">注册</button>
+    </form>
+
+</div> <!-- /container -->
+
+
+<!-- <input type="text" name="username" id="username">
+    <input type="password" name="password" id="password">
+    <input type="button" value="注册" id="btn"> -->
+
+<script>
+    //用ajax post
+$('#btn').click(function () {
+
+})
+
+    $('#mpanel2').codeVerify({
+        type: 2,
+        width: '400px',
+        height: '50px',
+        fontSize: '30px',
+        codeLength: 6,
+        btnId: 'btn',
+        ready: function () {
+        },
+        success: function () {
+            // alert('验证匹配！');
+
+            $.ajax({
+                url: '/users/api-register',
+                type: 'post',
+                data: {
+                    username: $('#username').val(),
+                    password: $('#password').val()
+                },
+                success: function (res) {
+                    console.log(res);
+                    if (res.code == 1) {
+                        alert(res.msg); //返回后端状态
+                        location.href = '/users/login';//成功跳转登陆页
+                    } else {
+                        alert(res.msg)
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            })
+
+
+
+        },
+        error: function () {
+            alert('验证码不匹配！');
+        }
+    });
+
+
+</script>
+
+</body>
+
+</html>

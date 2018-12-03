@@ -1,0 +1,24 @@
+
+    <% include header %>
+    <h1><%= title %></h1>
+    <ul class="list">
+      <% for(var i=0;i<data.length;i++){ %>
+              <li>
+                      <a href="/users/article/<%= data[i]._id %> "><h2><%= data[i].title %></h2></a> 
+                      <p>作者：<span><%= data[i].username %> </span></p>
+                      <p>时间：<span><%= formatTime(data[i].time) %> </span></p>
+                      <p>浏览次数：<span><%= data[i].pv?data[i].pv:0 %> </span></p>
+              </li>
+      <% } %> 
+      
+        </ul>
+
+        <% if(pageNum >1){%>
+        <a href="<%= preUrl%>">上一页</a>
+        <% }%>
+       
+        <span><%=pageNum %></span>
+        <a href="<%= nextUrl%>">下一页</a>
+  
+  </body>
+</html>

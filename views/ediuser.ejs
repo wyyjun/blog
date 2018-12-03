@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= title%></title>
+    <script src="/js/jquery.min.js"></script>
+    <!-- bootstrap.min.css -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/css/signin.css" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/verify.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/verify.js"></script>
+    <!-- <script src="../../assets/js/ie-emulation-modes-warning.js"></script> -->
+</head>
+<body>
+    <div style="width:100%;height: 100px;">用户修改</div>
+    <p><%=data._id %></p>
+<p><%=data.username %></p>
+<p><%=data.password %></p>
+<p><%=data.date %></p>
+<p><%=data.type %></p>
+<div class="container">
+
+        <form class="form-signin">
+            <h2 class="form-signin-heading">请修改</h2>
+            <label for="userid">用户ID（不能修改）</label>
+            <input type="text" id="userid" class="form-control" disabled="disabled" value="<%=data._id %>" required autofocus>
+            <label for="username">用户名</label>
+            <input type="text" id="username" class="form-control" value="<%=data.username %>" required autofocus>
+            <label for="password">注册密码</label>
+            <input type="password" id="password" class="form-control n-txtCss" value="<%=data.password %>" required>
+            <label for="date" >注册日期</label>
+            <input type="text" id="date" class="form-control n-txtCss" value="<%=data.date %>" required>
+            <label for="isAdmin">是否为管理员</label>
+            <input type="text" id="isAdmin" class="form-control n-txtCss" value="<%=data.type %>" required>
+            </div>
+            <div id="mpanel2"></div>
+            <button class="btn btn-lg btn-primary btn-block" type="button" id="btn">修改</button>
+        </form>
+    
+    </div> <!-- /container -->
+    <script>
+            //用ajax post
+        $('#btn').click(function () {
+            $.ajax({
+                        url: '/admin/api-ediuser',
+                        type: 'post',
+                        data: {
+                            userid: $('#userid').val(),
+                            username: $('#username').val(),
+                            password: $('#password').val(),
+                            date: $('#date').val(),
+                            type: $('#isAdmin').val()
+                        },
+                        success: function (res) {
+                            console.log(res);
+                            if (res.code == 1) {
+                                alert(res.msg); //返回后端状态
+                                location.href = '/admin/user';//成功跳转登陆页
+                            } else {
+                                alert(res.msg)
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    })
+        })
+        
+            
+        
+        
+        </script>
+</body>
+</html>

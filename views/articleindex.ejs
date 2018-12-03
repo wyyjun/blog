@@ -1,0 +1,40 @@
+<% include header1 %>
+
+<!-- 文章详情页 -->
+
+
+<div class="a-userNav">
+  <span><a href="/">管理首页</a></span>
+  <span> / </span>
+  <span>文章列表</span>
+  <p><a href="/admin/content/articleadd">添加文章</a></p>
+</div>
+<table class="a-userTable">
+<thead>
+  <tr>
+    <th>文章ID</th>
+    <th>标题</th>
+    <th>内容</th>
+    <th>发布时间</th>
+    <th>作者</th>
+    <th>操作</th>
+  </tr>
+</thead>
+<tbody>
+    <% for(var i=0;i<data.length;i++){ %>
+     
+  <tr>
+    <td><%= data[i]._id %></td>
+    <td><%= data[i].title %></td>
+    <td><%- data[i].content %></td>
+    <td><%= formatTime(data[i].time)%></td>
+    <td><%= data[i].username %></td>
+    <td><a href="/admin/ediarticle/<%= data[i]._id.toString() %>">修改</a>&nbsp;<a href="/admin/delarticle/<%= data[i]._id.toString() %>">删除</a></td>
+  </tr>
+  <% } %> 
+</tbody>
+</table>
+
+
+</body>
+</html>

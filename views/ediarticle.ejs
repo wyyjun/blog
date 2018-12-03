@@ -1,0 +1,40 @@
+<% include header1 %>
+<div class="a-userNav">
+    <span><a href="/">管理首页</a></span>
+    <span> / </span>
+    <span>文章修改</span>
+   
+  </div>
+
+  <form class="form-signin">
+    <h2 class="form-signin-heading">请修改</h2>
+    <label for="articleid" >文章ID（不能修改）</label>
+    <input type="text" id="articleid" class="form-control" disabled="disabled" value="<%=data._id %>" required autofocus>
+    <label for="title">标题</label>
+    <input type="text" id="title" class="form-control" value="<%=data.title %>" required autofocus>
+    <label for="content">内容</label>
+    <input type="text" id="content" class="form-control" value="<%=data.content %>" style="margin-bottom:10px;" required autofocus>
+    <button class="btn btn-lg btn-primary btn-block" type="button" id="btn">修改</button>
+  </form>
+
+  <script>
+    //用ajax post
+$('#btn').click(function () {
+            $.ajax({
+        url: '/admin/api-ediarticle',
+        type: 'post',
+        data: {
+            id:$('#articleid').val(),
+            title: $('#title').val(),
+            content: $('#content').val()
+
+        }
+    })
+})
+
+    
+
+
+</script>
+</body>
+</html>

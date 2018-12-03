@@ -1,0 +1,49 @@
+<% include header1 %>
+
+<!-- 文章详情页 -->
+
+
+<div class="a-userNav">
+  <span><a href="/">管理首页</a></span>
+  <span> / </span>
+  <span>用户列表</span>
+  <p><a href="/admin/user/adduser">添加用户</a></p>
+</div>
+<table class="a-userTable">
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>用户名</th>
+    <th>密码</th>
+    <th>注册时间</th>
+    <th>是否是管理员</th>
+    <th>操作</th>
+  </tr>
+</thead>
+<tbody>
+    <% for(var i=0;i<data.length;i++){ %>
+     
+  <tr>
+    <td><%= data[i]._id %></td>
+    <td><%= data[i].username %></td>
+    <td><%= data[i].password %></td>
+    <td><%= formatTime(data[i].date)%></td>
+
+  
+    <td>
+        <% if(data[i].type == true){ %>
+         <b>是</b>
+   
+          <% }else{ %>
+            <b>不是</b>
+       <% } %>     
+    </td>
+    <td><a href="/admin/ediuser/<%= data[i]._id.toString() %>">修改</a>&nbsp;&nbsp;<a href="/admin/deluser/<%= data[i]._id.toString() %>">删除</a></td>
+  </tr>
+  <% } %> 
+</tbody>
+</table>
+
+
+</body>
+</html>

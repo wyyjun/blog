@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= title%></title>
+    <script src="/js/jquery.min.js"></script>
+    <!-- bootstrap.min.css -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/css/signin.css" rel="stylesheet">
+
+    
+
+  
+
+
+
+    <link href="/css/dashboard.css" rel="stylesheet">
+
+    <!-- <script src="../../assets/js/ie-emulation-modes-warning.js"></script> -->
+</head>
+<body>
+
+<div>
+
+
+<h1>博客系统</h1>
+
+<% if(username){ %>
+    <%= username %>:您好
+    <a href="/users">个人中心</a>
+    <br>
+    <a href="/users/logout">退出</a>
+    <% if(type == true){ %>
+        <a href="/admin">博客管理中心</a>
+ 
+        <% }else{ %>
+           <p>普通用户</p>
+     <% } %>     
+      
+
+    <% }else{ %>
+        <div>
+                <a href="/users/register">注册</a>
+                <a href="/users/login">登陆</a>
+            </div>
+    <% } %>
+
+    
+   
+</div>

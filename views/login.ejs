@@ -1,0 +1,54 @@
+
+    <% include header %>
+    <h2><%= title%></h2>
+    <div class="container">
+
+            <form class="form-signin">
+              <h2 class="form-signin-heading">请登录</h2>
+              <label for="username" class="sr-only">用户名</label>
+              <input type="text" id="username" class="form-control" placeholder="用户名" required autofocus>
+              <label for="password" class="sr-only">密码</label>
+              <input type="password" id="password" class="form-control" placeholder="密码" required>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="remember-me" id="ty"> Remember me
+                </label>
+              </div>
+              <button class="btn btn-lg btn-primary btn-block" type="button" id="btn">登陆</button>
+            </form>
+      
+          </div> <!-- /container -->
+
+    <!-- <input type="text" name="username" id="username">
+    <input type="password" name="password" id="password">
+    <input type="button" value="登陆" id="btn"> -->
+    
+<script>//用ajax post
+$('#btn').click(function(){
+    $.ajax({
+    url:'/users/api-login',
+    type:'post',
+    data:{
+        username:$('#username').val(),
+        password:$('#password').val(),
+        ty:$('#ty').attr("checked")
+    },
+    success:function(res){
+        console.log(res);
+        if(res.code == 1){
+        
+            alert(res.msg); //返回后端状态
+            location.href = '/users/';//成功跳转登陆页
+            //   }
+        }else{
+            alert(res.msg)
+        }
+    },
+    error:function(error){
+        console.log(error);
+    }
+})
+})
+</script>
+</body>
+</html> 
